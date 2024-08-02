@@ -3,23 +3,19 @@ import { useRequest } from "ahooks";
 
 import { Space, Button, Select } from "antd";
 
-import Brand from "./pages/Brand";
-import Token from "./pages/Token";
-import Images from "./pages/Images";
 import Menu from "./components/Menu";
-import BasicCode from "./pages/BasicCode";
 
 import { type LabelInValue, PersonOption, setLocalStorage } from "./utils";
 
 import { getToken } from "@/services";
 
 const App: React.FC = () => {
-  const [current, setCurrent] = useState("token");
   const [currentUser, setCurrentUser] = useState<LabelInValue>();
 
   const { value: userId, label: userName } = useMemo(() => {
     return JSON.parse(localStorage.getItem("userInfo") ?? "{}");
   }, []);
+
   useEffect(() => {
     setCurrentUser({
       label: userName ?? "余利飞 - 3397210042",
@@ -37,7 +33,7 @@ const App: React.FC = () => {
           value: data.data,
           expires: 86400000,
         });
-
+        console.log("data", data);
         localStorage.setItem("token", token);
 
         setLocalStorage(token);
@@ -55,6 +51,7 @@ const App: React.FC = () => {
       {currentUser ? (
         <Space style={{ fontSize: 16 }}>
           <span style={{ fontSize: "14px" }}>切换账户</span>
+
           <Select
             style={{ width: "190px" }}
             value={currentUser}
@@ -66,6 +63,7 @@ const App: React.FC = () => {
             }}
             labelInValue
           />
+
           <Button
             type="link"
             onClick={run}
@@ -78,12 +76,7 @@ const App: React.FC = () => {
         </Space>
       ) : null}
 
-      <Menu onChange={setCurrent} />
-
-      {current === "token" ? <Token /> : null}
-      {current === "image" ? <Images /> : null}
-      {current === "brand" ? <Brand /> : null}
-      {current === "basicCode" ? <BasicCode /> : null}
+      <Menu />
     </Space>
   );
 };

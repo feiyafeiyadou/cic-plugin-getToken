@@ -1,4 +1,4 @@
-import { getUploadedImage } from "../../../services";
+import { getUploadedImage } from "@/services";
 import { useRequest } from "ahooks";
 import { Button, Input, Space, Image } from "antd";
 import React, { useState } from "react";
@@ -34,7 +34,7 @@ const Images: React.FC = () => {
 
       <Button
         size="large"
-        color="primary"
+        type="primary"
         onClick={getFileInfo}
         loading={loading}
         block
@@ -45,29 +45,14 @@ const Images: React.FC = () => {
       {!!fileId && !!fileInfo?.fileThumbnailUrl ? (
         <Space direction="vertical" style={{ width: "100%" }}>
           <span>缩略图⬇️</span>
-          <Image
-            width={300}
-            src={fileInfo.fileThumbnailUrl}
-            // onClick={() =>
-            //   setFileStatus({
-            //     visible: true,
-            //     fileUrl: fileInfo.fileThumbnailUrl,
-            //   })
-            // }
-          />
+          <Image width={300} src={fileInfo.fileThumbnailUrl} />
         </Space>
       ) : null}
 
       {!!fileId && !!fileInfo?.fileUrl ? (
         <Space direction="vertical" style={{ width: "100%" }}>
           <span>正常图片⬇️</span>
-          <Image
-            width={300}
-            src={fileInfo.fileUrl}
-            // onClick={() =>
-            //   setFileStatus({ visible: true, fileUrl: fileInfo.fileUrl })
-            // }
-          />
+          <Image width={300} src={fileInfo.fileUrl} />
         </Space>
       ) : null}
     </Space>

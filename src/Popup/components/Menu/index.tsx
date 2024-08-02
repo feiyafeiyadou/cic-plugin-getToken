@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 
-import { Menu } from "antd";
+import { Menu, Space } from "antd";
+
+import Brand from "../../pages/Brand";
+import Token from "../../pages/Token";
+import Images from "../../pages/Images";
+import BasicCode from "../../pages/BasicCode";
 
 import type { MenuProps } from "antd";
 
@@ -23,22 +28,26 @@ const items: MenuProps["items"] = [
   },
 ];
 
-const App: React.FC<{ onChange: (key: string) => void }> = (props) => {
-  const { onChange } = props;
+const App: React.FC = () => {
   const [current, setCurrent] = useState("token");
 
   const onClick: MenuProps["onClick"] = (e) => {
     setCurrent(e.key);
-    onChange(e.key);
   };
 
   return (
-    <Menu
-      onClick={onClick}
-      selectedKeys={[current]}
-      mode="horizontal"
-      items={items}
-    />
+    <Space direction="vertical">
+      <Menu
+        onClick={onClick}
+        selectedKeys={[current]}
+        mode="horizontal"
+        items={items}
+      />
+      {current === "token" ? <Token /> : null}
+      {current === "image" ? <Images /> : null}
+      {current === "brand" ? <Brand /> : null}
+      {current === "basicCode" ? <BasicCode /> : null}
+    </Space>
   );
 };
 

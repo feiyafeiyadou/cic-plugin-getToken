@@ -1,7 +1,7 @@
 import {
   getJySubBrandInfoByCode,
   getJySubBrandInfoByFuzzyQuery,
-} from "../../../services";
+} from "@/services";
 import { useRequest } from "ahooks";
 import { Button, Input, Radio, RadioChangeEvent, Space } from "antd";
 import React, { useState } from "react";
@@ -71,7 +71,7 @@ const Brand: React.FC = () => {
             />
             <Button
               size="large"
-              color="primary"
+              type="primary"
               onClick={value === "2" ? getBrandInfo : getSubBrandInfo}
               loading={loading || queryLoading}
             >

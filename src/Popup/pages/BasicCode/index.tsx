@@ -1,4 +1,4 @@
-import { getBasicCode } from "../../../services";
+import { getBasicCode } from "@/services";
 import { useRequest } from "ahooks";
 import { Button, Input, Space, Form } from "antd";
 import React from "react";
@@ -70,12 +70,7 @@ const BasicCode: React.FC = () => {
           </Form>
         </Space>
 
-        <Button
-          size="large"
-          color="primary"
-          onClick={getCode}
-          loading={loading}
-        >
+        <Button size="large" type="primary" onClick={getCode} loading={loading}>
           获取码值信息
         </Button>
       </Space>
